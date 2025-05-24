@@ -29,6 +29,7 @@ public class TodosController {
     }
     @DeleteMapping("/todos/{id}")
     public void deleteTodo(@PathVariable Integer id){
+        System.out.println("Deleting the TODO with ID : " + id);
         todoService.deleteTodo(id);
     }
 
