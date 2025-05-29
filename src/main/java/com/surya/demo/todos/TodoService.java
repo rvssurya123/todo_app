@@ -59,5 +59,6 @@ public class TodoService {
         Todo todo = todoRepository.findById(id).get();
 
         return todo;
+
     }
 }
