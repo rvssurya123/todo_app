@@ -1,7 +1,11 @@
 package com.surya.demo.todos;
 
+import com.surya.demo.dtos.ToDoRequestDto;
+import com.surya.demo.dtos.ToDoResponseDto;
+import jakarta.validation.Valid;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -17,16 +21,21 @@ public class TodosController {
 
     //ADD TASK
     @PostMapping("/todos")
-    public Map<String, Integer> addTask(@RequestBody Map<String, String> todo) {
+    public ResponseEntity<ToDoResponseDto> addTask(@RequestBody @Valid ToDoRequestDto todo) {
         // add data to DB and return the id in json format
 
         int todoId = todoService.addNewTodo(todo);
 
         System.out.println(todo);
 
-        Map<String, Integer> map = new HashMap<>();
-        map.put("id", todoId);
-        return map;
+        //ToDoRequestDto toDoRequestDto = new ToDoRequestDto();
+
+        ToDoResponseDto toDoResponseDto = new ToDoResponseDto();
+        toDoResponseDto.setId(todoId);
+//        Map<String, Integer> map = new HashMap<>();
+//        map.put("id", todoId);
+        ResponseEntity<ToDoResponseDto> response = ResponseEntity.status(201).body(toDoResponseDto);
+        return response;
     }
     @DeleteMapping("/todos/{id}")
     public void deleteTodo(@PathVariable Integer id){

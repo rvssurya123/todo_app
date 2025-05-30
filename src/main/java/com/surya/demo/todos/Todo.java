@@ -19,7 +19,8 @@ import java.util.Date;
 public class Todo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    private Integer id;
+
 
     @Column(name = "description")
     String description;

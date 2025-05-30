@@ -1,5 +1,6 @@
 package com.surya.demo.todos;
 
+import com.surya.demo.dtos.UserRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +14,10 @@ public class UserService {
 
 
     // user creation
-    public int createUser(Map<String, String> userData){
+    public int createUser(UserRequestDto userData){
         User newUser = new User();
-        newUser.setName(userData.get("name"));
-        newUser.setMail(userData.get("mail"));
+        newUser.setName(userData.getName());
+        newUser.setMail(userData.getMail());
         User newSavedUser = userRepository.save(newUser);
         return newSavedUser.getId();
     }

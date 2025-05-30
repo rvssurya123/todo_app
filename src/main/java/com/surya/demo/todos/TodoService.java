@@ -1,11 +1,11 @@
 package com.surya.demo.todos;
 
 
+import com.surya.demo.dtos.ToDoRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -16,12 +16,13 @@ public class TodoService {
 
 
     // add todo -- returns id
-    public int addNewTodo(Map<String, String> todoData) {
+    public int addNewTodo(ToDoRequestDto todoData) {
         Todo newTodo = new Todo();
-        newTodo.description = todoData.get("description");
+        newTodo.description = todoData.getDescription();
+        newTodo.userId = todoData.getUserId();
 
         Todo savedTodo = todoRepository.save(newTodo);
-        return savedTodo.id;
+        return savedTodo.getId();
     }
 
     // update todo
